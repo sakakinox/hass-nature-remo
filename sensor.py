@@ -28,12 +28,9 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     for appliance in appliances.values():
         if appliance["type"] == "EL_SMART_METER":
             entities.append(NatureRemoE(coordinator, appliance))
-            # Check for EPC 224 (Consumed Energy)
-            if any(prop.get("epc") == 224 for prop in appliance.get("echonetlite_properties", [])):
-                entities.append(NatureRemoEnergySensor(coordinator, appliance))
-            # Check for EPC 227 (Returned Energy)
-            if any(prop.get("epc") == 227 for prop in appliance.get("echonetlite_properties", [])):
-                entities.append(NatureRemoReturnedEnergySensor(coordinator, appliance))
+            entities.append(NatureRemoEnergySensor(coordinator, appliance))
+            entities.append(NatureRemoReturnedEnergySensor(coordinator, appliance))
+
     for device in devices.values():
         # skip devices that include in appliances
         if device["id"] in [appliance["device"]["id"] for appliance in appliances.values()]:
