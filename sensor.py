@@ -164,13 +164,13 @@ class NatureRemoCumulativeEnergySensorBase(NatureRemoBase, SensorEntity):
 
 
 class NatureRemoEnergySensor(NatureRemoCumulativeEnergySensorBase):
-    def __init__(self, coordinator, appliance):
-        super().__init__(coordinator, appliance, epc=224, sensor_type="Consumed")
+    _epc = 224
+    _sensor_type = "Consumed"
 
 
 class NatureRemoReturnedEnergySensor(NatureRemoCumulativeEnergySensorBase):
-    def __init__(self, coordinator, appliance):
-        super().__init__(coordinator, appliance, epc=227, sensor_type="Returned")
+    _epc = 227
+    _sensor_type = "Returned"
 
 
 class NatureRemoTemperatureSensor(NatureRemoDeviceBase, SensorEntity):
