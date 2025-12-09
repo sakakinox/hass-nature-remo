@@ -3,19 +3,19 @@ name = "hass-nature-remo"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-    "homeassistant>=2024.3.3",
-    "voluptuous>=0.13.1",
+    "homeassistant>=2024.12.5",
+    "voluptuous>=0.15.2",
 ]
 
 [dependency-groups]
 dev = [
-    "ipykernel>=6.29.5",
-    "mypy>=1.15.0",
-    "pytest>=8.3.5",
-    "pytest-cov>=6.0.0",
-    "ruff>=0.11.2",
+    "ipykernel>=7.1.0",
+    "mypy>=1.19.0",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.8",
 ]
 
 
@@ -24,4 +24,4 @@ line-length = 100
 target-version = "py311"
 
 [tool.pytest.ini_options]
-addopts = "--base-url http://0.0.0.0:5001"
+# addopts = "--base-url http://0.0.0.0:5001"  # Commented out - requires pytest-base-url plugin
