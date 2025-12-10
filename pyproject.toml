@@ -1,5 +1,5 @@
 [project]
-name = "hass-nature-remo"
+name = "hass_nature_remo"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

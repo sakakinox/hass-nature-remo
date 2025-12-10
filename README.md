@@ -26,8 +26,8 @@ Yet another [Home Assistant](https://www.home-assistant.io) component for [Natur
 - [x] Others
   - [x] Fetch sensor data
 
-Tested on Home Assistant Core 2024.3.4 (Linux)  
-Only energy sensor features (including cumulative consumed and returned energy) have been tested.  
+Tested on Home Assistant Core 2024.3.4 (Linux)
+Only energy sensor features (including cumulative consumed and returned energy) have been tested.
 Other device features (e.g. air conditioners, switches) were not verified in this update.
 
 ## Home Assistant Energy Dashboard support
@@ -56,11 +56,11 @@ Enter the following information in the dialog and click `Add` button.
 {path_to_your_config}
 ├── configuration.yaml
 └── custom_components
-    └── nature_remo
-        ├── __init__.py
-        ├── climate.py
-        ├── manifest.json
-        └── sensor.py
+    └── nature_remo
+        ├── __init__.py
+        ├── climate.py
+        ├── manifest.json
+        └── sensor.py
 ```
 
 ### Install via git submodule
@@ -81,3 +81,137 @@ git submodule add https://github.com/yutoyazaki/hass-nature-remo.git {path_to_cu
 nature_remo:
   access_token: YOUR_ACCESS_TOKEN
 ```
+
+## Development
+
+This section contains information for developers who want to contribute to this project.
+
+### Prerequisites
+
+- Python 3.12 or higher
+- [uv](https://docs.astral.sh/uv/) - Python package manager
+
+### Setup Development Environment
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/hannoeru/hass-nature-remo.git
+   cd hass-nature-remo
+   ```
+
+2. **Install uv** (if not already installed)
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+3. **Set up virtual environment and install dependencies**
+   ```bash
+   uv sync --dev
+   ```
+
+4. **Activate the virtual environment**
+   ```bash
+   source .venv/bin/activate
+   ```
+
+### Development Tools
+
+This project uses several development tools to maintain code quality:
+
+#### Code Linting and Formatting
+
+- **Ruff** - Fast Python linter and formatter
+  ```bash
+  # Check for linting issues
+  uv run ruff check
+
+  # Fix auto-fixable issues
+  uv run ruff check --fix
+
+  # Format code
+  uv run ruff format
+  ```
+
+#### Type Checking
+
+- **mypy** - Static type checker
+  ```bash
+  uv run mypy .
+  ```
+
+#### Testing
+
+- **pytest** - Testing framework
+  ```bash
+  # Run all tests
+  uv run pytest
+
+  # Run tests with coverage
+  uv run pytest --cov
+
+  # Run specific test file
+  uv run pytest tests/test_specific.py
+  ```
+
+### Project Structure
+
+```
+hass-nature-remo/
+├── __init__.py          # Main integration setup
+├── climate.py           # Climate entity implementation
+├── sensor.py            # Sensor entities implementation
+├── manifest.json        # Home Assistant integration manifest
+├── pyproject.toml       # Project configuration and dependencies
+├── README.md            # This file
+└── tests/               # Test files (if any)
+```
+
+### Adding New Features
+
+1. **Follow Home Assistant development patterns** - Refer to the [Home Assistant Developer Documentation](https://developers.home-assistant.io/)
+
+2. **Add type annotations** - All new code should include proper type hints
+
+3. **Write tests** - Add tests for new functionality in the `tests/` directory
+
+4. **Run quality checks** before committing:
+   ```bash
+   # Run all checks
+   uv run ruff check --fix
+   uv run ruff format
+   uv run mypy .
+   uv run pytest
+   ```
+
+### Debugging
+
+For debugging the integration:
+
+1. **Enable debug logging** in your Home Assistant `configuration.yaml`:
+   ```yaml
+   logger:
+     default: info
+     logs:
+       custom_components.nature_remo: debug
+   ```
+
+2. **Use Home Assistant's developer tools** to inspect entity states and attributes
+
+3. **Check Home Assistant logs** for any error messages related to the integration
+
+### Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes following the development guidelines above
+4. Run all quality checks
+5. Submit a pull request
+
+### Home Assistant Integration Testing
+
+To test the integration with Home Assistant:
+
+1. **Install Home Assistant** in a development environment
+2. **Copy the integration** to your `custom_components` directory
+3. **Add the configuration** to your `configuration.yaml`
+4. **Restart Home Assistant** and check the logs for any issues
