@@ -73,16 +73,18 @@ class NatureRemoE(NatureRemoBase, SensorEntity):
             name=self._name,
             device_class=SensorDeviceClass.POWER,
             native_unit_of_measurement=UnitOfPower.WATT,
+            state_class=SensorStateClass.MEASUREMENT,
         )
 
-    @cached_property
+    @property
     def native_value(self) -> float | None:
         """Return the state of the sensor."""
         appliance = self._coordinator.data["appliances"][self._appliance_id]
         smart_meter = appliance["smart_meter"]
         echonetlite_properties = smart_meter["echonetlite_properties"]
         measured_instantaneous = next(
-            value["val"] for value in echonetlite_properties if value["epc"] == 231
+            (float(value["val"]) for value in echonetlite_properties if value["epc"] == 231),
+            None,
         )
         _LOGGER.debug("Current state: %sW", measured_instantaneous)
         return measured_instantaneous
