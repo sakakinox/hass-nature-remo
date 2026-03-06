@@ -38,9 +38,9 @@ async def async_setup_platform(
             entities.append(NatureRemoE(coordinator, appliance))
 
             echonetlite_properties = appliance.get("smart_meter", {}).get(
-            "echonetlite_properties", []
-        )
-            
+                "echonetlite_properties", []
+            )
+
             # Check for EPC 224 (Consumed Energy)
             if any(prop.get("epc") == 224 for prop in echonetlite_properties):
                 entities.append(NatureRemoEnergySensor(coordinator, appliance))
