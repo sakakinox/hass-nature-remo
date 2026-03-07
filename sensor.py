@@ -147,7 +147,7 @@ class NatureRemoCumulativeEnergySensorBase(NatureRemoBase, SensorEntity):
         props = {int(p["epc"]): float(p["val"]) for p in smart_meter["echonetlite_properties"]}
         return self.calculate_energy(props, self._epc)
 
-    property
+    @property
     def available(self) -> bool:
         appliance = self._coordinator.data["appliances"][self._appliance_id]
         smart_meter = appliance["smart_meter"]
