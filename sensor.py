@@ -73,6 +73,7 @@ class NatureRemoE(NatureRemoBase, SensorEntity):
             name=self._name,
             device_class=SensorDeviceClass.POWER,
             native_unit_of_measurement=UnitOfPower.WATT,
+            state_class=SensorStateClass.MEASUREMENT
         )
 
     @property
